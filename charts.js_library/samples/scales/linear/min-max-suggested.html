@@ -1,0 +1,75 @@
+<!doctype html>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+	<title>Suggested Min/Max Settings</title>
+	<script src="../../../Chart.bundle.js"></script>
+	<script src="../../utils.js"></script>
+	<style>
+	canvas{
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">3TEAVC5TXHNY-18-1447</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">30678993-defd-4b4b-8db2-8a427f4c0dfb</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://cs2.eis.af.mil/sites/12690/_layouts/15/DocIdRedir.aspx?ID=3TEAVC5TXHNY-18-1447, 3TEAVC5TXHNY-18-1447</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+	<div style="width:75%;">
+		<canvas id="canvas"></canvas>
+	</div>
+	<script>
+		var config = {
+			type: 'line',
+			data: {
+				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+				datasets: [{
+					label: 'My First dataset',
+					backgroundColor: window.chartColors.red,
+					borderColor: window.chartColors.red,
+					data: [10, 30, 39, 20, 25, 34, -10],
+					fill: false,
+				}, {
+					label: 'My Second dataset',
+					fill: false,
+					backgroundColor: window.chartColors.blue,
+					borderColor: window.chartColors.blue,
+					data: [18, 33, 22, 19, 11, 39, 30],
+				}]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: 'Min and Max Settings'
+				},
+				scales: {
+					yAxes: [{
+						ticks: {
+							// the data minimum used for determining the ticks is Math.min(dataMin, suggestedMin)
+							suggestedMin: 10,
+
+							// the data maximum used for determining the ticks is Math.max(dataMax, suggestedMax)
+							suggestedMax: 50
+						}
+					}]
+				}
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myLine = new Chart(ctx, config);
+		};
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>chartjs-plugin-datasource sample</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="../chartjs-plugin-datasource.js"></script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+		.chart {
+			margin: auto;
+			width: 75%;
+		}
+		.text-center {
+			text-align: center;
+		}
+	</style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">3TEAVC5TXHNY-18-1491</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">8f91a1a2-cda1-400f-9574-2fb0f4b84103</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://cs2.eis.af.mil/sites/12690/_layouts/15/DocIdRedir.aspx?ID=3TEAVC5TXHNY-18-1491, 3TEAVC5TXHNY-18-1491</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+	<div class="chart">
+		<canvas id="myChart"></canvas>
+	</div>
+
+	<script>
+		var chartColors = {
+			red: 'rgb(255, 99, 132)',
+			blue: 'rgb(54, 162, 235)'
+		};
+
+		var color = Chart.helpers.color;
+		var config = {
+			type: 'bar',
+			data: {
+				datasets: [{
+					type: 'line',
+					yAxisID: 'temperature',
+					backgroundColor: 'transparent',
+					borderColor: chartColors.red,
+					pointBackgroundColor: chartColors.red,
+					tension: 0,
+					fill: false
+				}, {
+					yAxisID: 'precipitation',
+					backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
+					borderColor: 'transparent'
+				}]
+			},
+			plugins: [ChartDataSource],
+			options: {
+				title: {
+					display: true,
+					text: 'CSV data source (dataset) sample'
+				},
+				scales: {
+					xAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Month'
+						}
+					}],
+					yAxes: [{
+						id: 'temperature',
+						gridLines: {
+							drawOnChartArea: false
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'Temperature (°C)'
+						}
+					}, {
+						id: 'precipitation',
+						position: 'right',
+						gridLines: {
+							drawOnChartArea: false
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'Precipitation (mm)'
+						}
+					}]
+				},
+				plugins: {
+					datasource: {
+						type: 'csv',
+						url: 'sample-dataset.csv',
+						delimiter: ',',
+						rowMapping: 'dataset',
+						datasetLabels: true,
+						indexLabels: true
+					}
+				}
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('myChart').getContext('2d');
+			window.myChart = new Chart(ctx, config);
+		};
+	</script>
+</body>
+
+</html>
