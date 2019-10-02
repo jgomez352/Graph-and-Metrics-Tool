@@ -4,14 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>CC Score Card & VM Tools</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="img/PlaceHolder.jpg" />
+    <link href="css/main.css" rel="stylesheet">
+    <script src="charts.js_library/Chart.bundle.js"></script>
 </head>
 <body>
+    <!-- Beginning header -->
     <header>
-        <div id="header Area">
-            <img src="#" alt="Alternate Text" />
+        <div id="headerArea">
+            <img src="img/PlaceHolder.jpg" alt="Alternate Text" />
+            <div id="headerTextContainer">
+                <h1 id="headerText">Company Name</h1>
+                <h2 id="headerSubText">Project name</h2>
+                <p id="headerDate">1 Oct 2019</p>
+            </div>
         </div>
     </header>
+    <!-- End header -->
+    <!-- Beginning main -->
+    <main id="maincontent">
+        <div class="charts">
+            <h2>Limited Technical Inspections</h2>
+            <canvas id="myChart" width="400" height="400"></canvas>
+            <script src="js/charts.js"></script>
+        </div>
+    </main>
+    <!-- End main -->
 <p>Hello World!</p>
 </body>
 </html>
