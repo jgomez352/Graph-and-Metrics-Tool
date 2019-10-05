@@ -24,12 +24,13 @@ window.chartBorderColors = {
 };
 
 var myChart = new Chart(ctx, {
-        type: 'bar',
+    type: 'bar',
     data: {
-        labels: dataLabels,
+       // labels: dataLabels,
         datasets: [{
-        label: dataHeader,
-            data: dataNumbers,
+            yAxisID: 'BEALE (MOB)',
+            label: dataHeader,
+           // data: dataNumbers,
             backgroundColor: [
                 window.chartColors.green,
                 window.chartColors.orange,
@@ -49,16 +50,28 @@ var myChart = new Chart(ctx, {
             borderWidth: 1
         }]
     },
+    plugins: [ChartDataSource],
     options: {
         legend: {
             display: false,
         },
         scales: {
-        yAxes: [{
-        ticks: {
-        beginAtZero: true
+            yAxes: [{
+                id: 'temperature',
+                ticks: {
+                    beginAtZero: true
                 }
             }]
+        },
+        plugins: {
+            datasource: {
+                type: 'csv',
+                url: 'data/LTIs2.csv',
+                delimiter: ',',
+                rowMapping: 'dataset',
+                datasetLabels: true,
+                indexLabels: true
+            }
         }
     }
 });

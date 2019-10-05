@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\chartjs-plugin-datasource",
+    "\\css",
+    "\\data",
+    "\\js"
   ],
-  "SelectedNode": "\\index.html",
+  "SelectedNode": "\\data\\LTIs.csv",
   "PreviewInSolutionExplorer": false
 }
