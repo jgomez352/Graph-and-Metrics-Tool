@@ -23,14 +23,14 @@ window.chartBorderColors = {
     grey: 'rgb(201, 203, 207)'
 };
 
+
 var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'bar', 
     data: {
-       // labels: dataLabels,
+        // labels: dataLabels,
         datasets: [{
-            yAxisID: 'BEALE (MOB)',
             label: dataHeader,
-           // data: dataNumbers,
+            //data: dataNumbers,
             backgroundColor: [
                 window.chartColors.green,
                 window.chartColors.orange,
@@ -53,12 +53,12 @@ var myChart = new Chart(ctx, {
     plugins: [ChartDataSource],
     options: {
         legend: {
-            display: false,
+            display: true,
         },
         scales: {
             yAxes: [{
-                id: 'temperature',
                 ticks: {
+
                     beginAtZero: true
                 }
             }]
@@ -74,4 +74,37 @@ var myChart = new Chart(ctx, {
             }
         }
     }
+   
 });
+
+function myFilter(index) {
+    let ci = myChart;
+    let meta;
+    let i = 0;
+    for (i = 0; i < ci.data.datasets.length; i++) {
+        if (i != index) {
+            meta = ci.getDatasetMeta(i);
+            // See controller.isDatasetVisible comment
+            meta.hidden = meta.hidden === null ? !ci.data.datasets[i].hidden : null;
+            // We hid a dataset ... rerender the chart
+        };
+    };
+    ci.data.datasets[index].backgroundColor = [
+        window.chartColors.green,
+        window.chartColors.orange,
+        window.chartColors.orange,
+        window.chartColors.orange,
+        window.chartColors.orange,
+        window.chartColors.orange
+    ];
+    ci.data.datasets[index].borderColor = [
+        window.chartBorderColors.green,
+        window.chartBorderColors.red,
+        window.chartBorderColors.red,
+        window.chartBorderColors.red,
+        window.chartBorderColors.red,
+        window.chartBorderColors.red
+    ];
+    ci.update();
+};
+

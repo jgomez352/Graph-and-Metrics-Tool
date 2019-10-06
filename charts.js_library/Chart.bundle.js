@@ -7116,7 +7116,7 @@ defaults._set('doughnut', {
 			var index = legendItem.index;
 			var chart = this.chart;
 			var i, ilen, meta;
-
+           //console.log(index);
 			for (i = 0, ilen = (chart.data.datasets || []).length; i < ilen; ++i) {
 				meta = chart.getDatasetMeta(i);
 				// toggle visibility of index if exists
@@ -7779,7 +7779,7 @@ defaults._set('polarArea', {
 			var index = legendItem.index;
 			var chart = this.chart;
 			var i, ilen, meta;
-
+            //console.log(index);
 			for (i = 0, ilen = (chart.data.datasets || []).length; i < ilen; ++i) {
 				meta = chart.getDatasetMeta(i);
 				meta.data[index].hidden = !meta.data[index].hidden;
@@ -15949,7 +15949,7 @@ defaults._set('global', {
 			var index = legendItem.datasetIndex;
 			var ci = this.chart;
 			var meta = ci.getDatasetMeta(index);
-
+            //console.log(index);
 			// See controller.isDatasetVisible comment
 			meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
 

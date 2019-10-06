@@ -24,11 +24,20 @@
     <!-- End header -->
     <!-- Beginning main -->
     <main id="maincontent">
-        <div class="charts">
-            <h2>Limited Technical Inspections</h2>
-            <canvas id="myChart" width="400" height="400"></canvas>
-            <script src="js/charts.js"></script>
-        </div>
+        <div class="filter-options" id="filter-options" tabindex="-1">
+            <div>
+                <label>Location</label>
+                <select id="Location-select" name="Locations" onchange="myFilter(0)">
+                    <option value="nothing">Select Location</option>
+                    <option value=0>Miami</option>
+                </select>
+            </div>
+         </div>
+            <div class="charts">
+                <h2>Limited Technical Inspections</h2>
+                <canvas id="myChart" width="400" height="400"></canvas>
+                <script src="js/charts.js"></script>
+            </div>
     </main>
     <!-- End main -->
 <p>Hello World!</p>

@@ -1,3 +1,4 @@
-ALLOW_BASE_DESC_TX,Pending LTIs,?Under 31 days,Between 31 and 89 Days,Between 90 and 119 Days,Between 120 and 179 Days,Between 180 and 364 Days,Over 365 Days
-BEALE (MOB),16,0,1,0,4,6,5
-CREECH (MOB),1,1,,,,,
+ALLOW_BASE_DESC_TX,Under 31 days,31 & 89 Days,90 & 119 Days,120 & 179 Days,180 & 364 Days,Over 365 Days
+Miami,5,1,0,4,6,5
+Texas,1,,,,,
+Virginia,1,5,8,6,2,1
