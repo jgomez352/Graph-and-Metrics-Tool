@@ -1,0 +1,94 @@
+<!doctype html>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+	<title>Tooltip Interaction Modes</title>
+	<script src="../../Chart.bundle.js"></script>
+	<script src="../utils.js"></script>
+	<style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	.chart-container {
+		width: 500px;
+		margin-left: 40px;
+		margin-right: 40px;
+		margin-bottom: 40px;
+	}
+	.container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	</style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">3TEAVC5TXHNY-18-1467</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">23a635bc-d699-411d-a8b5-67f429d61362</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://cs2.eis.af.mil/sites/12690/_layouts/15/DocIdRedir.aspx?ID=3TEAVC5TXHNY-18-1467, 3TEAVC5TXHNY-18-1467</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+	<div class="container">
+	</div>
+	<script>
+		function createConfig(position) {
+			return {
+				type: 'line',
+				data: {
+					labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+					datasets: [{
+						label: 'My First dataset',
+						borderColor: window.chartColors.red,
+						backgroundColor: window.chartColors.red,
+						data: [10, 30, 46, 2, 8, 50, 0],
+						fill: false,
+					}, {
+						label: 'My Second dataset',
+						borderColor: window.chartColors.blue,
+						backgroundColor: window.chartColors.blue,
+						data: [7, 49, 46, 13, 25, 30, 22],
+						fill: false,
+					}]
+				},
+				options: {
+					responsive: true,
+					title: {
+						display: true,
+						text: 'Tooltip Position: ' + position
+					},
+					tooltips: {
+						position: position,
+						mode: 'index',
+						intersect: false,
+					},
+				}
+			};
+		}
+
+		window.onload = function() {
+			var container = document.querySelector('.container');
+
+			['average', 'nearest'].forEach(function(position) {
+				var div = document.createElement('div');
+				div.classList.add('chart-container');
+
+				var canvas = document.createElement('canvas');
+				div.appendChild(canvas);
+				container.appendChild(div);
+
+				var ctx = canvas.getContext('2d');
+				var config = createConfig(position);
+				new Chart(ctx, config);
+			});
+		};
+	</script>
+</body>
+
+</html>

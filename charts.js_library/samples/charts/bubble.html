@@ -1,0 +1,199 @@
+<!doctype html>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+	<title>Bubble Chart</title>
+	<script src="../../Chart.bundle.js"></script>
+	<script src="../utils.js"></script>
+	<style type="text/css">
+		canvas{
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">3TEAVC5TXHNY-18-1405</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">3b71b1b8-a6d7-4906-8dbb-6c780aa4dd90</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://cs2.eis.af.mil/sites/12690/_layouts/15/DocIdRedir.aspx?ID=3TEAVC5TXHNY-18-1405, 3TEAVC5TXHNY-18-1405</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+	<div id="container" style="width: 75%;">
+		<canvas id="canvas"></canvas>
+	</div>
+	<button id="randomizeData">Randomize Data</button>
+	<button id="addDataset">Add Dataset</button>
+	<button id="removeDataset">Remove Dataset</button>
+	<button id="addData">Add Data</button>
+	<button id="removeData">Remove Data</button>
+	<script>
+		var DEFAULT_DATASET_SIZE = 7;
+
+		var addedCount = 0;
+		var color = Chart.helpers.color;
+		var bubbleChartData = {
+			animation: {
+				duration: 10000
+			},
+			datasets: [{
+				label: 'My First dataset',
+				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.red,
+				borderWidth: 1,
+				data: [{
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}]
+			}, {
+				label: 'My Second dataset',
+				backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.orange,
+				borderWidth: 1,
+				data: [{
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}, {
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				}]
+			}]
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myChart = new Chart(ctx, {
+				type: 'bubble',
+				data: bubbleChartData,
+				options: {
+					responsive: true,
+					title: {
+						display: true,
+						text: 'Chart.js Bubble Chart'
+					},
+					tooltips: {
+						mode: 'point'
+					}
+				}
+			});
+		};
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			bubbleChartData.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return {
+						x: randomScalingFactor(),
+						y: randomScalingFactor(),
+						r: Math.abs(randomScalingFactor()) / 5,
+					};
+				});
+			});
+			window.myChart.update();
+		});
+
+		var colorNames = Object.keys(window.chartColors);
+		document.getElementById('addDataset').addEventListener('click', function() {
+			++addedCount;
+			var colorName = colorNames[bubbleChartData.datasets.length % colorNames.length];
+			var dsColor = window.chartColors[colorName];
+			var newDataset = {
+				label: 'My added dataset ' + addedCount,
+				backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+				borderColor: dsColor,
+				borderWidth: 1,
+				data: []
+			};
+
+			for (var index = 0; index < DEFAULT_DATASET_SIZE; ++index) {
+				newDataset.data.push({
+					x: randomScalingFactor(),
+					y: randomScalingFactor(),
+					r: Math.abs(randomScalingFactor()) / 5,
+				});
+			}
+
+			bubbleChartData.datasets.push(newDataset);
+			window.myChart.update();
+		});
+
+		document.getElementById('addData').addEventListener('click', function() {
+			if (bubbleChartData.datasets.length > 0) {
+				for (var index = 0; index < bubbleChartData.datasets.length; ++index) {
+					bubbleChartData.datasets[index].data.push({
+						x: randomScalingFactor(),
+						y: randomScalingFactor(),
+						r: Math.abs(randomScalingFactor()) / 5,
+					});
+				}
+
+				window.myChart.update();
+			}
+		});
+
+		document.getElementById('removeDataset').addEventListener('click', function() {
+			bubbleChartData.datasets.splice(0, 1);
+			window.myChart.update();
+		});
+
+		document.getElementById('removeData').addEventListener('click', function() {
+			bubbleChartData.datasets.forEach(function(dataset) {
+				dataset.data.pop();
+			});
+
+			window.myChart.update();
+		});
+	</script>
+</body>
+
+</html>

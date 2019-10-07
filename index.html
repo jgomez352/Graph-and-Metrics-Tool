@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CC Score Card & FM Tools</title>
+    <link rel="icon" type="image/x-icon" href="img/PlaceHolder.jpg" />
+    <link href="css/main.css" rel="stylesheet">
+    <script src="charts.js_library/Chart.bundle.js"></script>
+    <script src="chartjs-plugin-datasource/chartjs-plugin-datasource.js"></script>
+</head>
+<body>
+    <!-- Beginning header -->
+    <header>
+        <div id="headerArea">
+            <img src="img/PlaceHolder.jpg" alt="Alternate Text" />
+            <div id="headerTextContainer">
+                <h1 id="headerText">Company Name</h1>
+                <h2 id="headerSubText">Project name</h2>
+                <p id="headerDate">1 Oct 2019</p>
+            </div>
+        </div>
+    </header>
+    <!-- End header -->
+    <!-- Beginning main -->
+    <main id="maincontent">
+        <div class="filter-options" id="filter-options" tabindex="-1">
+            <div>
+                <label>Location</label>
+                <select id="Location-select" name="Locations" onchange="myFilter(0)">
+                    <option value="nothing">Select Location</option>
+                    <option value=0>Miami</option>
+                </select>
+            </div>
+         </div>
+            <div class="charts">
+                <h2>Limited Technical Inspections</h2>
+                <canvas id="myChart" width="400" height="400"></canvas>
+                <script src="js/charts.js"></script>
+            </div>
+    </main>
+    <!-- End main -->
+<p>Hello World!</p>
+</body>
+</html>

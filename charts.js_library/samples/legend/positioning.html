@@ -1,0 +1,129 @@
+<!doctype html>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+	<title>Legend Positions</title>
+	<script src="../../Chart.bundle.js"></script>
+	<script src="../utils.js"></script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+		.chart-container {
+			width: 500px;
+			margin-left: 40px;
+			margin-right: 40px;
+		}
+		.container {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+	</style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">3TEAVC5TXHNY-18-1438</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">d1da19f4-d483-4ec3-bb23-483fb98ebe39</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://cs2.eis.af.mil/sites/12690/_layouts/15/DocIdRedir.aspx?ID=3TEAVC5TXHNY-18-1438, 3TEAVC5TXHNY-18-1438</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+	<div class="container">
+		<div class="chart-container">
+			<canvas id="chart-legend-top"></canvas>
+		</div>
+		<div class="chart-container">
+			<canvas id="chart-legend-right"></canvas>
+		</div>
+		<div class="chart-container">
+			<canvas id="chart-legend-bottom"></canvas>
+		</div>
+		<div class="chart-container">
+			<canvas id="chart-legend-left"></canvas>
+		</div>
+	</div>
+	<script>
+		var color = Chart.helpers.color;
+		function createConfig(legendPosition, colorName) {
+			return {
+				type: 'line',
+				data: {
+					labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+					datasets: [{
+						label: 'My First dataset',
+						data: [
+							randomScalingFactor(),
+							randomScalingFactor(),
+							randomScalingFactor(),
+							randomScalingFactor(),
+							randomScalingFactor(),
+							randomScalingFactor(),
+							randomScalingFactor()
+						],
+						backgroundColor: color(window.chartColors[colorName]).alpha(0.5).rgbString(),
+						borderColor: window.chartColors[colorName],
+						borderWidth: 1
+					}]
+				},
+				options: {
+					responsive: true,
+					legend: {
+						position: legendPosition,
+					},
+					scales: {
+						xAxes: [{
+							display: true,
+							scaleLabel: {
+								display: true,
+								labelString: 'Month'
+							}
+						}],
+						yAxes: [{
+							display: true,
+							scaleLabel: {
+								display: true,
+								labelString: 'Value'
+							}
+						}]
+					},
+					title: {
+						display: true,
+						text: 'Legend Position: ' + legendPosition
+					}
+				}
+			};
+		}
+
+		window.onload = function() {
+			[{
+				id: 'chart-legend-top',
+				legendPosition: 'top',
+				color: 'red'
+			}, {
+				id: 'chart-legend-right',
+				legendPosition: 'right',
+				color: 'blue'
+			}, {
+				id: 'chart-legend-bottom',
+				legendPosition: 'bottom',
+				color: 'green'
+			}, {
+				id: 'chart-legend-left',
+				legendPosition: 'left',
+				color: 'yellow'
+			}].forEach(function(details) {
+				var ctx = document.getElementById(details.id).getContext('2d');
+				var config = createConfig(details.legendPosition, details.color);
+				new Chart(ctx, config);
+			});
+		};
+	</script>
+</body>
+
+</html>

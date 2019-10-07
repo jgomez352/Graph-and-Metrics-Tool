@@ -1,0 +1,101 @@
+<!doctype html>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>chartjs-plugin-datasource sample</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="https://cdn.jsdelivr.net/npm/xlsx@0.14.3/dist/xlsx.full.min.js"></script>
+	<script src="../chartjs-plugin-datasource.js"></script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+		.chart {
+			margin: auto;
+			width: 75%;
+		}
+		.text-center {
+			text-align: center;
+		}
+	</style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">3TEAVC5TXHNY-18-1520</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">3e193991-4531-4f07-b90d-bf9fdd78a55b</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://cs2.eis.af.mil/sites/12690/_layouts/15/DocIdRedir.aspx?ID=3TEAVC5TXHNY-18-1520, 3TEAVC5TXHNY-18-1520</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+	<div class="chart">
+		<canvas id="myChart"></canvas>
+	</div>
+
+	<script>
+		var chartColors = {
+			red: 'rgba(244,0,51,1.00)',
+			blue: 'rgb(54, 162, 235)'
+		};
+
+		var color = Chart.helpers.color;
+		var config = {
+			type: 'bar',
+			data: {
+				datasets: [ {
+					yAxisID: 'precipitation',
+					backgroundColor: color(chartColors.red).alpha(1.0).rgbString(),
+					borderColor: 'transparent'
+				}]
+			},
+			plugins: [ChartDataSource],
+			options: {
+				title: {
+					display: true,
+					text: 'Awaiting LTI - Base X'
+				},
+				scales: {
+					xAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Days'
+						}
+					}],
+					yAxes: [
+					 {
+						id: 'precipitation',
+						position: 'left',
+						gridLines: {
+							drawOnChartArea: false
+						},
+						scaleLabel: {
+							display: false,
+							labelString: 'Precipitation (mm)'
+						}
+					}]
+				},
+				plugins: {
+					datasource: {
+						type: 'sheet',
+						url: 'sample-index.xlsx',
+						rowMapping: 'index',
+						datasetLabels: 'Sheet1!B1',
+						indexLabels: 'Sheet1!A2:A7',
+						data: 'Sheet1!B2:B7'
+					}
+				}
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('myChart').getContext('2d');
+			window.myChart = new Chart(ctx, config);
+		};
+	</script>
+</body>
+
+</html>
