@@ -22,8 +22,6 @@ window.chartBorderColors = {
     purple: 'rgb(153, 102, 255)',
     grey: 'rgb(201, 203, 207)'
 };
-
-
 var myChart = new Chart(ctx, {
     type: 'bar', 
     data: {
@@ -76,35 +74,51 @@ var myChart = new Chart(ctx, {
     }
    
 });
-
-function myFilter(index) {
+function LocationFilter() {
+    let lSelect = document.getElementById('Location-select');
+    let lIndex = lSelect.selectedIndex;
+    let lValue =lSelect[lIndex].value;
+    let lOption = lSelect[lIndex].text  
+    //console.log('Value: ' + lValue);
+    //console.log('Index: ' + lIndex);
+    //console.log('Selected Option: ' + lOption);
     let ci = myChart;
     let meta;
     let i = 0;
-    for (i = 0; i < ci.data.datasets.length; i++) {
-        if (i != index) {
+    if (lValue != 'nothing') {
+        for (i = 0; i < ci.data.datasets.length; i++) {
             meta = ci.getDatasetMeta(i);
             // See controller.isDatasetVisible comment
-            meta.hidden = meta.hidden === null ? !ci.data.datasets[i].hidden : null;
-            // We hid a dataset ... rerender the chart
+            meta.hidden = null;
+
         };
-    };
-    ci.data.datasets[index].backgroundColor = [
-        window.chartColors.green,
-        window.chartColors.orange,
-        window.chartColors.orange,
-        window.chartColors.orange,
-        window.chartColors.orange,
-        window.chartColors.orange
-    ];
-    ci.data.datasets[index].borderColor = [
-        window.chartBorderColors.green,
-        window.chartBorderColors.red,
-        window.chartBorderColors.red,
-        window.chartBorderColors.red,
-        window.chartBorderColors.red,
-        window.chartBorderColors.red
-    ];
-    ci.update();
+        for (i = 0; i < ci.data.datasets.length; i++) {
+            if (i != Number(lValue)) {
+                meta = ci.getDatasetMeta(i);
+                // See controller.isDatasetVisible comment
+                meta.hidden = meta.hidden === null ? !ci.data.datasets[i].hidden : null;
+                // We hid a dataset ... rerender the chart
+            };
+        };
+        ci.data.datasets[lValue].backgroundColor = [
+            window.chartColors.green,
+            window.chartColors.orange,
+            window.chartColors.orange,
+            window.chartColors.orange,
+            window.chartColors.orange,
+            window.chartColors.orange
+        ];
+        ci.data.datasets[lValue].borderColor = [
+            window.chartBorderColors.green,
+            window.chartBorderColors.red,
+            window.chartBorderColors.red,
+            window.chartBorderColors.red,
+            window.chartBorderColors.red,
+            window.chartBorderColors.red
+        ];
+        ci.update();
+
+    }
+
 };
 
