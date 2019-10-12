@@ -54,6 +54,13 @@ var myChart = new Chart(ctx, {
             display: true,
         },
         scales: {
+            xAxes: [{
+                stacked: false,
+                beginAtZero: true,
+                ticks: {
+                    autoSkip: false
+                }
+            }],            
             yAxes: [{
                 ticks: {
 
