@@ -38,15 +38,14 @@ function chartsMaker() {
     const fragment = document.createDocumentFragment();
     const div = document.createElement('div');
     let htmlText = `
-<div class="charts" id="charts" style="display:none">
     <h2>${chartsH2s[c]}</h2>
-    <canvas id="${chartsIDs[c]}" width="400" height="400"></canvas>
-</div>
-`;
+    <canvas id="${chartsIDs[c]}" width="400" height="400"></canvas>`;
     div.className = 'ChartsContainer';
     div.innerHTML = htmlText;
     fragment.appendChild(div);
-    document.body.appendChild(fragment);
+    chartsDiv = document.getElementById('charts')
+    chartsDiv.appendChild(fragment);
+    //document.body.appendChild(fragment);
     makeChart(c);
     chartsDiv = document.getElementById('charts')
 };
