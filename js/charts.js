@@ -1,9 +1,18 @@
 // JavaScript source code
 
-var ctx = document.getElementById('myChart').getContext('2d');
-let dataNumbers = [100, 190, 30, 350, 20, 30];
-let dataLabels = ['Good Standing','30 to 89 Days','90 to 119 Days','120 to 179 Days','180 to 364 Days','365 and Over'];
-let dataHeader = 'LTIs'
+var ctx = document.getElementById('LTIVMT').getContext('2d');
+//let dataNumbers = [100, 190, 30, 350, 20, 30];
+//let dataLabels = ['Good Standing','30 to 89 Days','90 to 119 Days','120 to 179 Days','180 to 364 Days','365 and Over'];
+//let dataHeader = 'LTIs'
+
+//Charts parameters
+let chartsDiv = document.getElementById('charts'),
+    chartsIDs = ['LTIVMT'],
+    chartsH2s = ['Limited Technical Inspections'],
+    chartsType = ['bar'],
+    chartsFile = ['csv'],
+    chartsURL = ['LTIs2'];
+
 window.chartColors = {
     red: 'rgb(255, 0, 54, 0.7)',
     orange: 'rgb(255, 159, 64, 0.3)',
@@ -22,12 +31,12 @@ window.chartBorderColors = {
     purple: 'rgb(153, 102, 255)',
     grey: 'rgb(201, 203, 207)'
 };
-var myChart = new Chart(ctx, {
+let myChart = new Chart(ctx, {
     type: 'bar', 
     data: {
         // labels: dataLabels,
         datasets: [{
-            label: dataHeader,
+            //label: dataHeader,
             //data: dataNumbers,
             backgroundColor: [
                 window.chartColors.green,
@@ -51,7 +60,7 @@ var myChart = new Chart(ctx, {
     plugins: [ChartDataSource],
     options: {
         legend: {
-            display: true,
+            display: false,
         },
         scales: {
             xAxes: [{
@@ -124,8 +133,20 @@ function LocationFilter() {
             window.chartBorderColors.red
         ];
         ci.update();
+        chartsDiv.style.display = '';
 
     }
 
+};
+function chartsMaker() {
+    const fragment = document.createDocumentFragment();
+    const div = document.createElement('div');
+    let htmlText = `
+
+`;
+    div.className = 'ChartsContainer';
+    div.innerHTML = htmlText;
+    fragment.appendChild(div);
+    document.body.appendChild(fragment);
 };
 
