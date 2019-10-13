@@ -7,12 +7,12 @@
 //Charts parameters
 setTimeout(chartsMaker, 0);
 
-let chartsDiv,
-    chartsIDs = ['LTIVMT'],
-    chartsH2s = ['Limited Technical Inspections'],
-    chartsType = ['bar'],
-    chartsFile = ['csv'],
-    chartsURL = ['LTIs2'],
+let chartsDiv = document.getElementById('charts'),
+    chartsIDs = ['LTIVMT', 'LTIVMT2'],
+    chartsH2s = ['Limited Technical Inspections','Something else'],
+    chartsType = ['bar','line'],
+    chartsFile = ['csv','csv'],
+    chartsURL = ['LTIs2','LTIs2'],
     chartsList = [];
 
 window.chartColors = {
@@ -35,19 +35,22 @@ window.chartBorderColors = {
 };
 function chartsMaker() {
     let c = 0;
-    const fragment = document.createDocumentFragment();
-    const div = document.createElement('div');
-    let htmlText = `
+    let fragment;
+    let div;
+    let htmlText;
+    for (c = 0; c < chartsIDs.length; c++) {
+        fragment = document.createDocumentFragment();
+        div = document.createElement('div');
+        htmlText = `
     <h2>${chartsH2s[c]}</h2>
     <canvas id="${chartsIDs[c]}" width="400" height="400"></canvas>`;
-    div.className = 'ChartsContainer';
-    div.innerHTML = htmlText;
-    fragment.appendChild(div);
-    chartsDiv = document.getElementById('charts')
-    chartsDiv.appendChild(fragment);
-    //document.body.appendChild(fragment);
-    makeChart(c);
-    chartsDiv = document.getElementById('charts')
+        div.className = 'ChartsContainer';
+        div.innerHTML = htmlText;
+        fragment.appendChild(div);
+        chartsDiv.appendChild(fragment);
+        makeChart(c);
+        console.log(`Chart ${c + 1}`);
+    };
 };
 function makeChart(c) {
     let ctx = document.getElementById(`${chartsIDs[c]}`).getContext('2d');
@@ -120,11 +123,14 @@ function LocationFilter() {
     //console.log('Value: ' + lValue);
     //console.log('Index: ' + lIndex);
     //console.log('Selected Option: ' + lOption);
-    let ci = chartsList[0];
-
+    let ci;
+    let Locations = chartsList.length;
+    let l;
     let meta;
-    let i = 0;
+    let i;
     if (lValue != 'nothing') {
+        for (l = 0; l < Locations; l++) {
+            ci = chartsList[l];
         for (i = 0; i < ci.data.datasets.length; i++) {
             meta = ci.getDatasetMeta(i);
             // See controller.isDatasetVisible comment
@@ -138,24 +144,25 @@ function LocationFilter() {
                 meta.hidden = meta.hidden === null ? !ci.data.datasets[i].hidden : null;
                 // We hid a dataset ... rerender the chart
             };
+            };
+            ci.data.datasets[lValue].backgroundColor = [
+                window.chartColors.green,
+                window.chartColors.orange,
+                window.chartColors.orange,
+                window.chartColors.orange,
+                window.chartColors.orange,
+                window.chartColors.orange
+            ];
+            ci.data.datasets[lValue].borderColor = [
+                window.chartBorderColors.green,
+                window.chartBorderColors.red,
+                window.chartBorderColors.red,
+                window.chartBorderColors.red,
+                window.chartBorderColors.red,
+                window.chartBorderColors.red
+            ];
+            ci.update();
         };
-        ci.data.datasets[lValue].backgroundColor = [
-            window.chartColors.green,
-            window.chartColors.orange,
-            window.chartColors.orange,
-            window.chartColors.orange,
-            window.chartColors.orange,
-            window.chartColors.orange
-        ];
-        ci.data.datasets[lValue].borderColor = [
-            window.chartBorderColors.green,
-            window.chartBorderColors.red,
-            window.chartBorderColors.red,
-            window.chartBorderColors.red,
-            window.chartBorderColors.red,
-            window.chartBorderColors.red
-        ];
-        ci.update();
         chartsDiv.style.display = '';
 
     }
