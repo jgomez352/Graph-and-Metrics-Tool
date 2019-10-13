@@ -7,7 +7,8 @@
 //Charts parameters
 setTimeout(chartsMaker, 0);
 
-let chartsDiv = document.getElementById('charts'),
+let chartsDivs = document.getElementsByClassName('ChartsContainers'),
+    chartsDiv = document.getElementById('charts'),
     chartsIDs = ['LTIVMT', 'LTIVMT2'],
     chartsH2s = ['Limited Technical Inspections','Something else'],
     chartsType = ['bar','line'],
@@ -42,9 +43,10 @@ function chartsMaker() {
         fragment = document.createDocumentFragment();
         div = document.createElement('div');
         htmlText = `
-    <h2>${chartsH2s[c]}</h2>
-    <canvas id="${chartsIDs[c]}" width="400" height="400"></canvas>`;
-        div.className = 'ChartsContainer';
+        <h2>${chartsH2s[c]}</h2>
+        <canvas id="${chartsIDs[c]}" width="400px" height="400px"></canvas>`;
+        div.className = 'ChartsContainers';
+        div.style= 'display: none';
         div.innerHTML = htmlText;
         fragment.appendChild(div);
         chartsDiv.appendChild(fragment);
@@ -135,7 +137,6 @@ function LocationFilter() {
             meta = ci.getDatasetMeta(i);
             // See controller.isDatasetVisible comment
             meta.hidden = null;
-
         };
         for (i = 0; i < ci.data.datasets.length; i++) {
             if (i != Number(lValue)) {
@@ -163,8 +164,12 @@ function LocationFilter() {
             ];
             ci.update();
         };
-        chartsDiv.style.display = '';
 
+        for (i = 0; i < chartsDivs.length; i++) {
+            chartsDivs[i].style.display = '';
+        };
+        setTimeout(function () {
+            chartsDiv.style.display = 'flex';
+        },60);
     }
-
 };

@@ -3,15 +3,11 @@
 *Welcome to the CC Score Card/FM Tools css
 */
 
-/************
-    Header
-*************/
-
+/************Header*************/
 header {
     display: flex;
     flex-wrap: wrap;
 }
-
 #headerArea {
     padding: 25px 25px 5px 25px;
     border-bottom-width: 10px;
@@ -19,7 +15,7 @@ header {
     border-bottom-color: black;
     width: 100%;
 }
-    #headerArea img {
+#headerArea img {
         margin-left: auto;
         margin-right: auto;
         display: block;
@@ -32,24 +28,12 @@ header {
     text-transform: uppercase;
     font-family: 'Playfair Display', serif;
 }
-
 #headerText, #headerDate {
     margin-bottom: 0px;
 }
-
 #headerSubText, #headerDate {
     margin-top: 0px;
 }
-.charts {
-    max-width: 400px;
-    padding: 25px;
-}
-
-.charts h2{
-    font-style:italic;
-    text-align:center;
-}
-
 /* ====================== Location Filtering ====================== */
 .filter-options {
     width: 100%;
@@ -60,8 +44,7 @@ header {
     flex-wrap: wrap;
     justify-content: center;
 }
-
-    .filter-options div {
+.filter-options div {
         font-family: Arial,sans-serif;
         font-size: 16pt;
         letter-spacing: 0;
@@ -73,21 +56,31 @@ header {
         width: 390px;
         text-align: -webkit-center;
     }
-
-        .filter-options div label {
+.filter-options div label {
             color: white;
             margin: 0 10px 0 10px;
             width: 175px;
         }
-
-    .filter-options select {
+.filter-options select {
         background-color: white;
         width: 160px;
         border: 1px solid #fff;
         font-size: 16px;
     }
-
+/* ====================== Charts ====================== */
+.charts {
+    flex-wrap:wrap;
+}
+.ChartsContainers{
+    max-width: 400px;
+}
+.charts canvas {
+}
+.charts h2 {
+        font-style: italic;
+        text-align: center;
+    }
 /* ====================== Footer ====================== */
 footer {
-    text-align:center;
+    text-align: center;
 }
