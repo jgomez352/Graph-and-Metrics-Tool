@@ -10,7 +10,7 @@ setTimeout(chartsMaker, 0);
 let chartsDivs = document.getElementsByClassName('ChartsContainers'),
     chartsDiv = document.getElementById('charts'),
     chartsIDs = ['LTIVMT', 'LTIVMT2'],
-    chartsH2s = ['Limited Technical Inspections','Something else'],
+    chartsH2s = ['Condition Inspections','Something else'],
     chartsType = ['bar','line'],
     chartsFile = ['csv','csv'],
     chartsURL = ['LTIs2','LTIs2'],
