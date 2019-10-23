@@ -17,13 +17,13 @@ let chartsDivs = document.getElementsByClassName('ChartsContainers'),
     chartsList = [];
 
 window.chartColors = {
-    red: 'rgb(255, 0, 54, 0.7)',
-    orange: 'rgb(255, 159, 64, 0.3)',
-    yellow: 'rgb(255, 205, 86)',
-    green: 'rgb(0, 178, 117, 0.3)',
-    blue: 'rgb(54, 162, 235)',
-    purple: 'rgb(153, 102, 255)',
-    grey: 'rgb(201, 203, 207)'
+    red: 'rgba(255, 0, 54, 0.7)',
+    orange: 'rgba(255, 159, 64, 0.3)',
+    yellow: 'rgba(255, 205, 86)',
+    green: 'rgba(0, 178, 117, 0.3)',
+    blue: 'rgba(54, 162, 235)',
+    purple: 'rgba(153, 102, 255)',
+    grey: 'rgba(201, 203, 207)'
 };
 window.chartBorderColors = {
     red: 'rgb(255, 0, 54, 1.0)',
